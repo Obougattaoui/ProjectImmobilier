@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 import java.util.Date;
 
@@ -18,13 +18,15 @@ public class Reservation {
 	private String note;
 	@ManyToOne
 	@JoinColumn(name = "UserId")
-	private Utilisateur utilisateur;
+	private AppUser utilisateur;
+	
+	
 	@OneToOne
 	private Annonce annonce;
 	public Reservation() {
 		super();
 	}
-	public Reservation(Long id, Date date, String note, Utilisateur utilisateur, Annonce annonce) {
+	public Reservation(Long id, Date date, String note, AppUser utilisateur, Annonce annonce) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -44,10 +46,10 @@ public class Reservation {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public Utilisateur getUtilisateur() {
+	public AppUser getUtilisateur() {
 		return utilisateur;
 	}
-	public void setUtilisateur(Utilisateur utilisateur) {
+	public void setUtilisateur(AppUser utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 	public Annonce getAnnonce() {

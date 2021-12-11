@@ -1,9 +1,10 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -16,12 +17,18 @@ public class Annonce {
 	private String ville;
 	private double prix;
 	private AnnonceType annonceType;
+	//Utilisateur
+	@ManyToOne
+	@JoinColumn(name="utilisateur_id")
+	private AppUser utilisateur;
+		
 	@OneToOne(mappedBy = "annonce")
 	private Reservation reservation;
 	@OneToOne
 	private Immobilier immobilier;
-	@ManyToOne
-	private Utilisateur utilisateur;
+	
+	
+	
 	public Annonce() {
 		super();
 	}

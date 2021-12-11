@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ public class Immobilier {
 	private ImmobilierType immobilierType;
 	private String adresse;
 	private String descriprion;
-	private Collection<File> images = new ArrayList<File>();
 	@OneToOne(mappedBy = "immobilier")
 	private Annonce annonce;
 	public Immobilier() {
@@ -25,13 +24,12 @@ public class Immobilier {
 	}
 	
 	public Immobilier(Long id, ImmobilierType immobilierType, String adresse, String descriprion,
-			Collection<File> images, Annonce annonce) {
+			 Annonce annonce) {
 		super();
 		this.id = id;
 		this.immobilierType = immobilierType;
 		this.adresse = adresse;
 		this.descriprion = descriprion;
-		this.images = images;
 		this.annonce = annonce;
 	}
 
@@ -52,12 +50,6 @@ public class Immobilier {
 	}
 	public void setDescriprion(String descriprion) {
 		this.descriprion = descriprion;
-	}
-	public Collection<File> getImages() {
-		return images;
-	}
-	public void setImages(Collection<File> images) {
-		this.images = images;
 	}
 	public Annonce getAnnonce() {
 		return annonce;

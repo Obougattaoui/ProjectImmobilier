@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,19 +16,19 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class Utilisateur {
+public class AppUser {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true)
 	private String username;
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Collection<Role> roles;
+	private Collection<AppRole> roles;
 	
 	private String numTele;
 	private String email;
 	private String ville;
-	private boolean isClient;
+	private boolean isClient;	
 	//Annonce :
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Annonce> annonces;
@@ -37,24 +37,40 @@ public class Utilisateur {
 	private List<Reservation> reservations;
 	//Contrat
 	@ManyToMany(mappedBy = "users")
-	@JoinTable(name = "UsersContrat")
 	private List<Contrat> contrats;
+	//Messages :
+	@ManyToMany
+	private List<Message> messages;
 	
-	public Utilisateur() {
+	@ManyToMany
+	private List<Groupe> groupes;
+	public AppUser() {
 		super();
 		this.annonces = new ArrayList<>();
 		this.reservations = new ArrayList<>();
 		this.contrats = new ArrayList<>();
+		this.messages = new ArrayList<>();
 	}
-	public Utilisateur(Long id, String username, String password, Collection<Role> roles) {
+	
+	public AppUser(Long id, String username, String password, Collection<AppRole> roles) {
 		super();
-		this.annonces = new ArrayList<>();
-		this.reservations = new ArrayList<>();
-		this.contrats = new ArrayList<>();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.roles = roles;
+	}
+
+	public AppUser(Long id, String username, String password, Collection<AppRole> roles, List<Message> messages) {
+		super();
+		this.annonces = new ArrayList<>();
+		this.reservations = new ArrayList<>();
+		this.contrats = new ArrayList<>();
+		this.messages = new ArrayList<Message>();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.roles = roles;
+		this.messages = messages;
 	}
 	public String getUsername() {
 		return username;
@@ -68,10 +84,10 @@ public class Utilisateur {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Collection<Role> getRoles() {
+	public Collection<AppRole> getRoles() {
 		return roles;
 	}
-	public void setRoles(Collection<Role> roles) {
+	public void setRoles(Collection<AppRole> roles) {
 		this.roles = roles;
 	}
 	public String getNumTele() {
@@ -115,6 +131,12 @@ public class Utilisateur {
 	}
 	public void setContrats(List<Contrat> contrats) {
 		this.contrats = contrats;
+	}
+	public List<Message> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
 	}
 	
 }

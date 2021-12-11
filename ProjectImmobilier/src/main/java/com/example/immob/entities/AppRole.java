@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,15 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Role {
+public class AppRole {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String roleName;
 	
-	public Role() {
+	public AppRole() {
 		super();
 	}
-	public Role(Long id, String roleName) {
+	public AppRole(Long id, String roleName) {
 		super();
 		this.id = id;
 		this.roleName = roleName;

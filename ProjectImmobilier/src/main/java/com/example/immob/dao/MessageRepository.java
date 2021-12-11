@@ -1,0 +1,9 @@
+package com.example.immob.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.immob.entities.Message;
+
+public interface MessageRepository extends JpaRepository<Message, Long>{
+
+}

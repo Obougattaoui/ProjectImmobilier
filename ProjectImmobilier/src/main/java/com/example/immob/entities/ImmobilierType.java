@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.example.immob.entities;
 
 public enum ImmobilierType {
 	VILLA,
