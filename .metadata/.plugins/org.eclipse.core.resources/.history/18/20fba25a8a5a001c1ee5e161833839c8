@@ -1,0 +1,45 @@
+package com.example.immob.service;
+
+import com.example.immob.entities.Annonce;
+import com.example.immob.entities.AnnonceType;
+import com.example.immob.entities.MaisonType;
+
+public class AnnonceServiceImpl implements AnnonceService{
+
+	@Override
+	public Annonce saveAnnonce(Annonce annonce) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByAnnonceType(AnnonceType annonceType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByMaisonType(MaisonType maisonType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByVille(String ville) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByPrix(double prix) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

@@ -1,0 +1,68 @@
+package com.example.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Message {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private MessageType messageType;
+	
+	@ManyToMany
+	private AppUser[] users;
+	@ManyToOne
+	private Groupe groupe;
+	
+	public Message() {
+		super();
+		this.users = AppUser[2];
+	}
+
+	public Message(Long id, MessageType messageType, AppUser userRece, AppUser userSend, Groupe groupe) {
+		super();
+		this.id = id;
+		this.messageType = messageType;
+		this.userRece = userRece;
+		this.userSend = userSend;
+		this.groupe = groupe;
+	}
+
+	public MessageType getMessageType() {
+		return messageType;
+	}
+
+	public void setMessageType(MessageType messageType) {
+		this.messageType = messageType;
+	}
+
+	public AppUser getUserRece() {
+		return userRece;
+	}
+
+	public void setUserRece(AppUser userRece) {
+		this.userRece = userRece;
+	}
+
+	public AppUser getUserSend() {
+		return userSend;
+	}
+
+	public void setUserSend(AppUser userSend) {
+		this.userSend = userSend;
+	}
+
+	public Groupe getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(Groupe groupe) {
+		this.groupe = groupe;
+	}
+	
+	
+}

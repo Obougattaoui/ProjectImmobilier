@@ -1,0 +1,12 @@
+package com.example.entities;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Utilisateur {
+	
+	private Long id;
+	private String username;
+	private String password;
+	
+}

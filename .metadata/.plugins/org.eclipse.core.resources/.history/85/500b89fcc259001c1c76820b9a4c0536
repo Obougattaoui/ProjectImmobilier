@@ -1,0 +1,8 @@
+package com.example.service;
+
+import com.example.entities.AppUser;
+
+//ce service est dédié au création des utilisateurs :
+public interface AccountService {
+	public AppUser 
+}

@@ -12,11 +12,12 @@ import javax.persistence.OneToOne;
 public class Annonce {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	private String name;
 	private String description;
 	private String ville;
 	private double prix;
 	private AnnonceType annonceType;
+	private MaisonType maisonType;
 	//Utilisateur
 	@ManyToOne
 	@JoinColumn(name="utilisateur_id")
@@ -33,14 +34,17 @@ public class Annonce {
 		super();
 	}
 	
-	public Annonce(Long id, String description, String ville, double prix, AnnonceType annonceType,
-			Reservation reservation, Immobilier immobilier) {
+	public Annonce(Long id, String name, String description, String ville, double prix, AnnonceType annonceType,
+			MaisonType maisonType, AppUser utilisateur, Reservation reservation, Immobilier immobilier) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.description = description;
 		this.ville = ville;
 		this.prix = prix;
 		this.annonceType = annonceType;
+		this.maisonType = maisonType;
+		this.utilisateur = utilisateur;
 		this.reservation = reservation;
 		this.immobilier = immobilier;
 	}
@@ -80,6 +84,38 @@ public class Annonce {
 	}
 	public void setImmobilier(Immobilier immobilier) {
 		this.immobilier = immobilier;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public AppUser getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(AppUser utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public MaisonType getMaisonType() {
+		return maisonType;
+	}
+
+	public void setMaisonType(MaisonType maisonType) {
+		this.maisonType = maisonType;
 	}
 	
 	

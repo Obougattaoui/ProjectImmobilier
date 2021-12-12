@@ -1,0 +1,29 @@
+package com.example.immob;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.service.AccountService;
+
+@SpringBootApplication
+public class ProjectImmobilierApplication implements CommandLineRunner{
+	@Autowired
+	private AccountService accountService;
+	public static void main(String[] args) {
+		SpringApplication.run(ProjectImmobilierApplication.class, args);
+	}
+	@Bean
+	public BCryptPasswordEncoder getBCRE() {
+		return new BCryptPasswordEncoder();
+	}
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

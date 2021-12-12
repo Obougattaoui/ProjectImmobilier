@@ -1,0 +1,52 @@
+package com.example.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.dao.RoleRepository;
+import com.example.dao.UserRepository;
+import com.example.immob.entities.AppRole;
+import com.example.immob.entities.AppUser;
+/*
+ * 
+ * 			ce service création des utilisateurs et des roles
+ * */
+@Service
+@Transactional
+public class AccountServiceImpl implements AccountService{
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Override
+	public AppUser saveUser(AppUser user) {
+		//crypter le password d'abord avant l'enregistrer dans la base de données
+		String hashPW = bCryptPasswordEncoder.encode(user.getPassword());
+		user.setPassword(hashPW);
+		return userRepository.save(user);
+	}
+
+	@Override
+	public AppRole saveRole(AppRole role) {
+		return roleRepository.save(role);
+	}
+
+	@Override
+	public void addRoleToUser(String username, String roleName) {
+		AppUser user = userRepository.findByUsername(username);
+		AppRole role = roleRepository.findByRoleName(roleName);
+		user.getRoles().add(role);
+	}
+
+	@Override
+	public AppUser findUserByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+}

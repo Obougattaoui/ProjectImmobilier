@@ -1,0 +1,9 @@
+package com.example.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.entities.Utilisateur;
+
+public interface UserRepository extends JpaRepository<Utilisateur, Long>{
+	public Utilisateur findByUsername(String username);
+}

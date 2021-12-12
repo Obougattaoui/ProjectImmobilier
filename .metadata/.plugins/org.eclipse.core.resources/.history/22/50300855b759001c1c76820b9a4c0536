@@ -1,0 +1,6 @@
+package com.example.entities;
+
+public class Message {
+	private MessageType messageType;
+	
+}

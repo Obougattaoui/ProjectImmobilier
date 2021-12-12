@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.formLogin();
 		http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll();
 		//lOGINR+ AND REGISTER : nécessite pas une authentification :
-		http.authorizeRequests().antMatchers("/login/**", "/register/**").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
 		http.addFilterBefore(new JWTAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class); 

@@ -1,0 +1,6 @@
+
+
+java:S1192"FDefine a constant instead of duplicating this literal "admin" 3 times.(ÁÃüéøÿÿÿÿ8ô±øËÚ/HäRCRITICALZ
+CODE_SMELL
+…	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—’ı™úÿÿÿÿ8œâ¨ÌÚ/HñRMINORZ
+CODE_SMELL

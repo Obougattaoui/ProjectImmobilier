@@ -1,0 +1,33 @@
+package com.example.entities;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Contrat {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String informations;
+	private Date date;
+	private Utilisateur[2] users;
+	//signature à ajouter aprés
+	public Contrat() {
+		super();
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getInformations() {
+		return informations;
+	}
+	public void setInformations(String informations) {
+		this.informations = informations;
+	}	
+}

@@ -1,0 +1,17 @@
+package com.example.service;
+
+import com.example.entities.AppRole;
+import com.example.entities.AppUser;
+
+
+//ce service est dédié au création des utilisateurs :
+public interface AccountService {
+	//Créer un user :
+	public AppUser saveUser(AppUser user);
+	//Créer un role :
+	public AppRole saveRole(AppRole role);
+	//Ajouter un role à la liste des roles d'un user 
+	public void addRoleToUser(String username, String roleName);
+	//chercher un utilisateur par son username :
+	public AppUser findUserByUsername(String username);
+}

@@ -1,0 +1,61 @@
+package com.example.immob.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.immob.dao.AnnonceRepository;
+import com.example.immob.entities.Annonce;
+import com.example.immob.entities.AnnonceType;
+import com.example.immob.entities.MaisonType;
+
+@Service
+public class AnnonceServiceImpl implements AnnonceService{
+	@Autowired
+	private AnnonceRepository annonceRepository;
+	
+	@Override
+	public Annonce saveAnnonce(Annonce annonce) {
+		return annonceRepository.save(annonce);
+	}
+
+	@Override
+	public Annonce findAnnonceById(Long id) {
+		Optional<Annonce> annonce = annonceRepository.findById(id);
+		if (!annonce.isPresent()) {
+			throw new RuntimeException("pas d'annonce ayant comme id = " + id);
+		}	
+		return annonce.get();
+	}
+
+	@Override
+	public Annonce findAnnonceByAnnonceType(AnnonceType annonceType) {
+		return annonceRepository.findByAnnonceType(annonceType);
+	}
+
+	@Override
+	public Annonce findAnnonceByMaisonType(MaisonType maisonType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByVille(String ville) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Annonce findAnnonceByPrix(double prix) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Annonce> findAll() {
+		return annonceRepository.findAll();
+	}
+	
+}

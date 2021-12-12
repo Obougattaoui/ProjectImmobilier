@@ -1,0 +1,10 @@
+package com.example.immob.service;
+
+import com.example.immob.entities.Annonce;
+
+public interface AnnonceService {
+	//Ajouter une annonce :
+	public Annonce saveAnnonce(Annonce annonce);
+	//chercher une annonce :
+	
+}

@@ -1,0 +1,44 @@
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.dao.RoleRepository;
+import com.example.dao.UserRepository;
+import com.example.entities.AppRole;
+import com.example.entities.AppUser;
+
+public class AccountServiceImpl implements AccountService{
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+	@Override
+	public AppUser saveUser(AppUser user) {
+		//crypter le password d'abord avant l'enregistrer dans la base de données
+		String hashPW = bCryptPasswordEncoder.encode(user.getPassword());
+		user.setPassword(hashPW);
+		return userRepository.save(user);
+	}
+
+	@Override
+	public AppRole saveRole(AppRole role) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addRoleToUser(String username, String roleName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public AppUser findUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

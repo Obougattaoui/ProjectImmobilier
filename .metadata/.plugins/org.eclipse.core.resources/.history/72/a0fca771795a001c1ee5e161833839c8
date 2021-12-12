@@ -1,0 +1,67 @@
+package com.example.immob.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Message {
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private MessageType messageType;
+	
+	@ManyToMany(mappedBy = "messages")
+	@JoinTable(name = "Message_Users", joinColumns = @JoinColumn(name="contrat_id", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name="user_id", referencedColumnName = "id")
+)
+	private AppUser[] users;
+	
+	@ManyToOne
+	private Groupe groupe;
+	
+	public Message() {
+		super();
+		this.users = new AppUser[2];
+	}
+
+	public Message(Long id, MessageType messageType, AppUser[] users, Groupe groupe) {
+		super();
+		this.users = new AppUser[2];
+		this.id = id;
+		this.messageType = messageType;
+		this.groupe = groupe;
+	}
+
+	public MessageType getMessageType() {
+		return messageType;
+	}
+
+	public void setMessageType(MessageType messageType) {
+		this.messageType = messageType;
+	}
+
+	
+
+	public AppUser[] getUsers() {
+		return users;
+	}
+
+	public void setUsers(AppUser[] users) {
+		this.users = users;
+	}
+
+	public Groupe getGroupe() {
+		return groupe;
+	}
+
+	public void setGroupe(Groupe groupe) {
+		this.groupe = groupe;
+	}
+	
+	
+}

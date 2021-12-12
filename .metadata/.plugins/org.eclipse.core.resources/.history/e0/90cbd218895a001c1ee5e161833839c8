@@ -1,0 +1,5 @@
+package com.example.immob.entities;
+
+public enum MaisonType {
+
+}
