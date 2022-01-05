@@ -1,5 +1,7 @@
 package com.example.immob.entities;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Annonce {
@@ -18,6 +22,8 @@ public class Annonce {
 	private double prix;
 	private AnnonceType annonceType;
 	private MaisonType maisonType;
+	//images :
+
 	//Utilisateur
 	@ManyToOne
 	@JoinColumn(name="utilisateur_id")
@@ -33,9 +39,9 @@ public class Annonce {
 	public Annonce() {
 		super();
 	}
-	
 	public Annonce(Long id, String name, String description, String ville, double prix, AnnonceType annonceType,
-			MaisonType maisonType, AppUser utilisateur, Reservation reservation, Immobilier immobilier) {
+			MaisonType maisonType, AppUser utilisateur, Reservation reservation,
+			Immobilier immobilier) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -48,6 +54,8 @@ public class Annonce {
 		this.reservation = reservation;
 		this.immobilier = immobilier;
 	}
+
+
 
 	public String getDescription() {
 		return description;
@@ -117,6 +125,6 @@ public class Annonce {
 	public void setMaisonType(MaisonType maisonType) {
 		this.maisonType = maisonType;
 	}
-	
+
 	
 }

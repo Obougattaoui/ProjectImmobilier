@@ -14,7 +14,6 @@ import javax.persistence.OneToOne;
 public class Immobilier {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private ImmobilierType immobilierType;
 	private String adresse;
 	private String descriprion;
 	@OneToOne(mappedBy = "immobilier")
@@ -23,22 +22,15 @@ public class Immobilier {
 		super();
 	}
 	
-	public Immobilier(Long id, ImmobilierType immobilierType, String adresse, String descriprion,
+	public Immobilier(Long id, String adresse, String descriprion,
 			 Annonce annonce) {
 		super();
 		this.id = id;
-		this.immobilierType = immobilierType;
 		this.adresse = adresse;
 		this.descriprion = descriprion;
 		this.annonce = annonce;
 	}
 
-	public ImmobilierType getImmobilierType() {
-		return immobilierType;
-	}
-	public void setImmobilierType(ImmobilierType immobilierType) {
-		this.immobilierType = immobilierType;
-	}
 	public String getAdresse() {
 		return adresse;
 	}
@@ -57,5 +49,14 @@ public class Immobilier {
 	public void setAnnonce(Annonce annonce) {
 		this.annonce = annonce;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	
 }

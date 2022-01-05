@@ -74,14 +74,12 @@ public class AnnonceServiceImpl implements AnnonceService{
 	@Override
 	public void deteleAnnonce(Annonce annonce) {
 		if (!annonceRepository.existsById(annonce.getId()))
-			throw new RuntimeException("cette annonce n'existe pas " + annonce);
+			throw new RuntimeException("cette annonce n'existe pas " + annonce.getId());
 		annonceRepository.delete(annonce);
 	}
 	@Override
 	public Annonce updateAnnnonce(Long id, Annonce newAnnonce) {
 		Annonce annonce = this.findAnnonceById(id);
-		if (annonce == null)
-			throw new RuntimeException("cette annonce n'existe pas " + annonce);
 		annonce.setName(newAnnonce.getName());
 		annonce.setDescription(newAnnonce.getDescription());
 		annonce.setVille(newAnnonce.getVille());

@@ -19,10 +19,9 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "UserId")
 	private AppUser utilisateur;
-	
-	
 	@OneToOne
 	private Annonce annonce;
+	
 	public Reservation() {
 		super();
 	}
@@ -58,4 +57,11 @@ public class Reservation {
 	public void setAnnonce(Annonce annonce) {
 		this.annonce = annonce;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 }
