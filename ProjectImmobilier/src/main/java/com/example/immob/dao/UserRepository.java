@@ -7,4 +7,5 @@ import com.example.immob.entities.AppUser;
 
 public interface UserRepository extends JpaRepository<AppUser, Long>{
 	public AppUser findByUsername(String username);
+	public AppUser findByEmail(String mail);
 }

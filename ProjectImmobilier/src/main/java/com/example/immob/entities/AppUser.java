@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -24,7 +23,6 @@ public class AppUser {
 	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<AppRole> roles;
-	
 	private String numTele;
 	private String email;
 	private String ville;
@@ -35,43 +33,25 @@ public class AppUser {
 	//Réservation :
 	@OneToMany(mappedBy = "utilisateur")
 	private List<Reservation> reservations;
-	//Contrat
-	@ManyToMany(mappedBy = "users")
-	private List<Contrat> contrats;
-	//Messages :
-	@ManyToMany
-	private List<Message> messages;
 	
-	@ManyToMany
-	private List<Groupe> groupes;
 	public AppUser() {
 		super();
 		this.annonces = new ArrayList<>();
 		this.reservations = new ArrayList<>();
-		this.contrats = new ArrayList<>();
-		this.messages = new ArrayList<>();
+		this.roles = new ArrayList<>();
 	}
 	
 	public AppUser(Long id, String username, String password, Collection<AppRole> roles) {
 		super();
+		this.annonces = new ArrayList<>();
+		this.reservations = new ArrayList<>();
+		this.roles = new ArrayList<>();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.roles = roles;
 	}
 
-	public AppUser(Long id, String username, String password, Collection<AppRole> roles, List<Message> messages) {
-		super();
-		this.annonces = new ArrayList<>();
-		this.reservations = new ArrayList<>();
-		this.contrats = new ArrayList<>();
-		this.messages = new ArrayList<Message>();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.roles = roles;
-		this.messages = messages;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -126,17 +106,12 @@ public class AppUser {
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
-	public List<Contrat> getContrats() {
-		return contrats;
+	public Long getId() {
+		return id;
 	}
-	public void setContrats(List<Contrat> contrats) {
-		this.contrats = contrats;
-	}
-	public List<Message> getMessages() {
-		return messages;
-	}
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

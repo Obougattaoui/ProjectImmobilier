@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +20,12 @@ public class ImageModel {
 	private String name;
 	@Column(name = "type")
 	private String type;
-	@Column(name = "picByte", length = 1000)
+	@Column(name = "picByte", length = 16777215)
 	private byte[] picByte;
+	
+	@ManyToOne
+	@JoinColumn(name="annonce_id")
+	private Annonce annonce;
 	public ImageModel() {
 		super();
 	}
@@ -28,6 +34,12 @@ public class ImageModel {
 		this.name = name;
 		this.type = type;
 		this.picByte = picByte;
+	}
+	public Annonce getAnnonce() {
+		return annonce;
+	}
+	public void setAnnonce(Annonce annonce) {
+		this.annonce = annonce;
 	}
 	public Long getId() {
 		return id;
