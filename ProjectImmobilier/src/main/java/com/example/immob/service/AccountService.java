@@ -18,12 +18,13 @@ public interface AccountService {
 	public void addRoleToUser(String username, String roleName);
 	//chercher un utilisateur par son username :
 	public AppUser findUserByUsername(String username);
-	
 	Boolean block(String angry, String blocked);
-	
 	Boolean unblock(String angry, String blocked);
-	
 	Boolean blockControl(String angry, String blocked);
-	
 	public Set<String> findAllByName();
+	public AppUser findUserById(Long id);
+	public void deleteUser(Long id);
+	public AppUser registerUser(RegisterForm registerForm);
+	public AppUser updateUser(Long id, AppUser newUser);
+	public void registrationActivityLog(String username);
 }

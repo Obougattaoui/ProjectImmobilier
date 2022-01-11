@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.springframework.data.annotation.Transient;
 
 
 @Entity
@@ -28,23 +31,18 @@ public class AppUser {
 	private String ville;
 	private boolean isClient;	
 	//Annonce :
-	@OneToMany(mappedBy = "utilisateur")
-	private List<Annonce> annonces;
-	//Réservation :
-	@OneToMany(mappedBy = "utilisateur")
-	private List<Reservation> reservations;
+	@OneToMany(mappedBy = "utilisateur", fetch = FetchType.LAZY)
+	private transient List<Annonce> annonces;
 	
 	public AppUser() {
 		super();
 		this.annonces = new ArrayList<>();
-		this.reservations = new ArrayList<>();
 		this.roles = new ArrayList<>();
 	}
 	
 	public AppUser(Long id, String username, String password, Collection<AppRole> roles) {
 		super();
 		this.annonces = new ArrayList<>();
-		this.reservations = new ArrayList<>();
 		this.roles = new ArrayList<>();
 		this.id = id;
 		this.username = username;
@@ -99,12 +97,6 @@ public class AppUser {
 	}
 	public void setAnnonces(List<Annonce> annonces) {
 		this.annonces = annonces;
-	}
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
 	}
 	public Long getId() {
 		return id;

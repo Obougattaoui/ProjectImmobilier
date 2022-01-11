@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.immob.entities.Annonce;
 import com.example.immob.entities.AnnonceType;
+import com.example.immob.entities.ImageModel;
 import com.example.immob.entities.MaisonType;
 
 public interface AnnonceService {
@@ -22,9 +23,12 @@ public interface AnnonceService {
 	//Afficher la liste de toutes les annonces :
 	public List<Annonce> findAll();
 	//supprimer une annonce :
-	public void deteleAnnonce(Annonce annonce);
+	public void deteleAnnonce(Long id);
 	//update Annonce :
 	public Annonce updateAnnnonce(Long id, Annonce newAnnonce);
-	//le nombre totale des annonces :
+	
+	public List<Annonce> findAnnonceByUserId(Long id);
+	public List<ImageModel> findImageModelsByAnnonceId(Long id);
+	public Long getCountByUserId(Long id);
 	
 }

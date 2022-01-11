@@ -5,7 +5,9 @@ package com.example.immob.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -23,34 +26,29 @@ public class Annonce {
 	private String name;
 	private String description;
 	private String ville;
+	private String adresse;
 	private double prix;
 	private AnnonceType annonceType;
 	private MaisonType maisonType;
+	private boolean estReserve;
 	//images :
-	@OneToMany(mappedBy = "annonce")
-	List<ImageModel> images;
+	@OneToMany(mappedBy = "annonce", fetch = FetchType.LAZY)
+	private transient List<ImageModel> images;
 	//Utilisateur
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="utilisateur_id")
 	private AppUser utilisateur;
-		
-	@OneToOne(mappedBy = "annonce")
-	private Reservation reservation;
-	@OneToOne
-	private Immobilier immobilier;
-	
-	
 	
 	public Annonce() {
 		super();
 		images = new ArrayList<>();
 	}
 	public Annonce(Long id, String name, String description, String ville, double prix, AnnonceType annonceType,
-			MaisonType maisonType, List<ImageModel> images, AppUser utilisateur, Reservation reservation,
-			Immobilier immobilier) {
+			MaisonType maisonType, List<ImageModel> images, AppUser utilisateur, String adresse, boolean estReserve) {
 		super();
 		images = new ArrayList<>();
 		this.id = id;
+		this.adresse = adresse;
 		this.name = name;
 		this.description = description;
 		this.ville = ville;
@@ -59,11 +57,16 @@ public class Annonce {
 		this.maisonType = maisonType;
 		this.images = images;
 		this.utilisateur = utilisateur;
-		this.reservation = reservation;
-		this.immobilier = immobilier;
+		this.estReserve = estReserve;
 	}
 
-
+	
+	public String getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
 	public List<ImageModel> getImages() {
 		return images;
 	}
@@ -93,18 +96,6 @@ public class Annonce {
 	}
 	public void setAnnonceType(AnnonceType annonceType) {
 		this.annonceType = annonceType;
-	}
-	public Reservation getReservation() {
-		return reservation;
-	}
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
-	}
-	public Immobilier getImmobilier() {
-		return immobilier;
-	}
-	public void setImmobilier(Immobilier immobilier) {
-		this.immobilier = immobilier;
 	}
 
 	public String getName() {
@@ -138,6 +129,10 @@ public class Annonce {
 	public void setMaisonType(MaisonType maisonType) {
 		this.maisonType = maisonType;
 	}
-
-	
+	public boolean isEstReserve() {
+		return estReserve;
+	}
+	public void setEstReserve(boolean estReserve) {
+		this.estReserve = estReserve;
+	}
 }

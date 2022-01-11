@@ -16,6 +16,7 @@ import com.example.immob.service.AccountService;
 public class ProjectImmobilierApplication implements CommandLineRunner{
 	@Autowired
 	private AccountService accountService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectImmobilierApplication.class, args);
 	}

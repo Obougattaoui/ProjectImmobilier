@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.immob.dao.AnnonceRepository;
+import com.example.immob.dao.ImageRepository;
+import com.example.immob.dao.UserRepository;
 import com.example.immob.entities.Annonce;
 import com.example.immob.entities.AnnonceType;
+import com.example.immob.entities.ImageModel;
 import com.example.immob.entities.MaisonType;
 
 @Service
@@ -16,6 +19,11 @@ public class AnnonceServiceImpl implements AnnonceService{
 	@Autowired
 	private AnnonceRepository annonceRepository;
 	
+	@Autowired
+	private ImageRepository imageRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	@Override
 	public Annonce saveAnnonce(Annonce annonce) {
 		return annonceRepository.save(annonce);
@@ -72,24 +80,38 @@ public class AnnonceServiceImpl implements AnnonceService{
 	}
 	
 	@Override
-	public void deteleAnnonce(Annonce annonce) {
-		if (!annonceRepository.existsById(annonce.getId()))
-			throw new RuntimeException("cette annonce n'existe pas " + annonce.getId());
+	public void deteleAnnonce(Long id) {
+		if (!annonceRepository.existsById(id))
+			throw new RuntimeException("cette annonce n'existe pas " + id);
+		Annonce annonce = this.findAnnonceById(id);
 		annonceRepository.delete(annonce);
 	}
 	@Override
 	public Annonce updateAnnnonce(Long id, Annonce newAnnonce) {
-		Annonce annonce = this.findAnnonceById(id);
-		annonce.setName(newAnnonce.getName());
-		annonce.setDescription(newAnnonce.getDescription());
-		annonce.setVille(newAnnonce.getVille());
-		annonce.setPrix(newAnnonce.getPrix());
-		annonce.setAnnonceType(newAnnonce.getAnnonceType());
-		annonce.setMaisonType(newAnnonce.getMaisonType());
-		annonce.setUtilisateur(newAnnonce.getUtilisateur());
-		annonce.setReservation(newAnnonce.getReservation());
-		annonce.setImmobilier(annonce.getImmobilier());
-		return annonce;
+		Optional<Annonce> annonceOptional = annonceRepository.findById(id);
+		if (!annonceOptional.isPresent())
+			throw new RuntimeException("cette annonce n'existe pas " + id);
+		newAnnonce.setId(id);
+		return annonceRepository.save(newAnnonce);
+	}
+
+	@Override
+	public List<Annonce> findAnnonceByUserId(Long id) {
+		if(!userRepository.existsById(id))
+			throw new RuntimeException("cette user n'existe pas ayant comme id: " + id);
+		return annonceRepository.findAnnoncesByUsers(id);
+	}
+	public List<ImageModel> findImageModelsByAnnonceId(Long id){
+		if(!annonceRepository.existsById(id))
+			throw new RuntimeException("cette annonce n'existe pas " + id);
+		return imageRepository.findImageModelsByAnnonceId(id);
+	}
+
+	@Override
+	public Long getCountByUserId(Long id) {
+		if(!userRepository.existsById(id))
+			throw new RuntimeException("cette user n'existe pas ayant comme id: " + id);
+		return annonceRepository.getCount(id);
 	}
 	
 }
